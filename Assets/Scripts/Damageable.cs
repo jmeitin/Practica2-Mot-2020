@@ -5,7 +5,7 @@ using UnityEngine;
 public class Damageable : MonoBehaviour
 {
     public int maxDamage;
-    public int points;
+   
 
     private int damage = 0;
     private Vector2 pos;
@@ -20,6 +20,8 @@ public class Damageable : MonoBehaviour
         player = GetComponent<PlayerController>();
     }
 
+ 
+
     public void MakeDamage()
     {
         damage++;
@@ -28,9 +30,7 @@ public class Damageable : MonoBehaviour
         {
             // ES UN ENEMIGO
             if (player == null) 
-            {
-                if (GameManager.instance != null) //PROTEGEMOS POR SI NO HAY GM
-                    GameManager.instance.EnemyDestroyed(points);
+            {               
 
                 Destroy(this.gameObject);
             }

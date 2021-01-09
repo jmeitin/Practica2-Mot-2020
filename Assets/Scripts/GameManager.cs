@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; //ESCENAS
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     private int lives = 3;
     private int score = 0;
+    private int enemiesInLevel = 0;
 
     void Awake()
     {
@@ -37,6 +39,9 @@ public class GameManager : MonoBehaviour
 
     public void EnemyDestroyed(int destructionPoints)
     {
+        enemiesInLevel--;
+        Debug.Log("Enemigos = " + enemiesInLevel);
+
         score += destructionPoints;
         Debug.Log("PUNTUACION = " + score);
     }
@@ -53,7 +58,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ChangeScene (string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 
+    public void AddEnemy()
+    {
+        enemiesInLevel++;
+        Debug.Log("Enemigos = "+ enemiesInLevel);
+    }
+
+   
 
 
 
