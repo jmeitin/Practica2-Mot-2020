@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI; //CANVAS
 
 public class UiManager : MonoBehaviour
@@ -27,8 +25,8 @@ public class UiManager : MonoBehaviour
     {
         livesText.text = numLives.ToString();
         enemiesLeft = numEnemies;
-        Debug.Log("ENEMIESLEFT INIT = " + enemiesLeft);
-
+        infoPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
         for (int i = 0; i < numEnemies; i++)
         {
             Image enemy = Instantiate(enemyIconPrefab);
@@ -44,13 +42,12 @@ public class UiManager : MonoBehaviour
 
     public void RemoveEnemy(int levelScore)
     {
-        Debug.Log("ENEMIESLEFT = " + enemiesLeft);
         if (enemiesLeft > 0)
         {
             if (enemiesPanel != null)
             {
                 enemiesPanel.GetChild(enemiesLeft - 1).gameObject.SetActive(false);
-                enemiesPanel.GetChild(enemiesLeft - 1).gameObject.SetActive(false);
+               
             }
 
             enemiesLeft--;
@@ -60,6 +57,14 @@ public class UiManager : MonoBehaviour
 
     public void Score(int levelScore, int sessionScore, int level, bool playing)
     {
-
+        //Si hemos ganado mostramos toda la info , si no un panel diciendo que hemos perdido 
+        if (playing)
+        {
+            infoPanel.SetActive(true);
+            levelScoreText.text = levelScore.ToString();
+            sessionScoreText.text = sessionScore.ToString();
+            stageText.text = level.ToString();
+        }
+        else gameOverPanel.SetActive(true);
     }
 }

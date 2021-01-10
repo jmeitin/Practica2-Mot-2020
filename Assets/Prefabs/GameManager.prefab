@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenesInOrder:
   - Menu
-  - Nivel 1
-  - Nivel 2
+  - Level1
+  - Level2

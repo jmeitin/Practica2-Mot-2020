@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
     private int lives = 3;
     private int levelScore = 0, sessionScore;
     private int enemiesInLevel = 0;
-    private UiManager uiManager;
+    private UiManager theUIManager;
 
-    
+
 
     void Awake()
     {
@@ -30,22 +30,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetUIManager (UiManager uim)
+    public void SetUIManager(UiManager uim)
     {
-        uiManager = uim;
+        theUIManager = uim;
         uim.Init(lives, enemiesInLevel, 0);
     }
 
     public bool PlayerDestroyed()
     {
         lives--;
-        Debug.Log("VIDAS = " + lives);
-        if (uiManager != null) uiManager.UpdateLives(lives); //codigo defensivo
+        if (theUIManager != null) theUIManager.UpdateLives(lives); //codigo defensivo
 
         if (lives <= 0) //no quedan vidas
         {
             FinishLevel(false); //el jugador perdio el nivel
-            return true; 
+            return true;
         }
         return false;
     }
@@ -53,27 +52,25 @@ public class GameManager : MonoBehaviour
     public void EnemyDestroyed(int destructionPoints)
     {
         enemiesInLevel--;
-        Debug.Log("Enemigos = " + enemiesInLevel);
-        if (uiManager != null) uiManager.RemoveEnemy(0);
-
+        if (theUIManager != null) theUIManager.RemoveEnemy(levelScore);
         levelScore += destructionPoints;
-        Debug.Log("PUNTUACION = " + levelScore);
+        
     }
 
     public void FinishLevel(bool playerWon)
     {
-        if (playerWon)
-        {
-            Debug.Log("GANO");
-        }
-        else
-        {
-            Debug.Log("PERDIO");
-          
-        }
-    }
 
-    public void ChangeScene (string sceneName)
+        sessionScore += levelScore;
+        levelScore = 0; //Reseteamos los puntos obtenidos en el nivel anterior cuando cambiamos al siguiente nivel
+        stage = SceneManager.GetActiveScene().buildIndex; //Obtenemos el valor de stage antes de pasar al siguiente nivel 
+        theUIManager.Score(levelScore, sessionScore, stage, playerWon);
+
+        if (playerWon) Invoke("NextLevel", 3);
+        else Invoke("GameOver", 3);
+
+
+    }
+    public void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
@@ -81,14 +78,24 @@ public class GameManager : MonoBehaviour
     public void AddEnemy()
     {
         enemiesInLevel++;
-        Debug.Log("Enemigos = "+ enemiesInLevel);
     }
-
-   
-
-
-
-
-
-
+    private void GameOver()
+    {
+        //Quitamos los puntos , ponemos 3 vidas al jugador y volvemos a la primera escena 
+        levelScore = 0;
+        sessionScore = 0;
+        lives = 3;
+        stage = 0;
+        //Como hemos perdido vamos al menu 
+        ChangeScene(scenesInOrder[0]);
+    }
+    void NextLevel()
+    {
+        stage++; //Avanzamos de Nivel 
+        if (stage < scenesInOrder.Length) //Ver si es el ultimo nivel 
+        {
+            ChangeScene(scenesInOrder[stage]);
+        }
+        else GameOver();
+    }
 }
