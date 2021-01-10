@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
     {
 
         sessionScore += levelScore;
-        levelScore = 0; //Reseteamos los puntos obtenidos en el nivel anterior cuando cambiamos al siguiente nivel
         stage = SceneManager.GetActiveScene().buildIndex; //Obtenemos el valor de stage antes de pasar al siguiente nivel 
         theUIManager.Score(levelScore, sessionScore, stage, playerWon);
 
@@ -97,5 +96,9 @@ public class GameManager : MonoBehaviour
             ChangeScene(scenesInOrder[stage]);
         }
         else GameOver();
+    }
+    void OnLevelWasLoaded(int level)
+    {
+        levelScore = 0;
     }
 }

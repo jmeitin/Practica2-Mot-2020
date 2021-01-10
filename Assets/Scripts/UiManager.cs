@@ -18,7 +18,7 @@ public class UiManager : MonoBehaviour
     void Start()
     {
         GameManager.instance.SetUIManager(this);
-        // enemiesLeft = 0;
+        
     }
 
     public void Init(int numLives, int numEnemies, int levelScore)
@@ -52,7 +52,7 @@ public class UiManager : MonoBehaviour
 
             enemiesLeft--;
         }
-        Debug.Log("ENEMIESLEFT = " + enemiesLeft);
+      
     }
 
     public void Score(int levelScore, int sessionScore, int level, bool playing)
