@@ -6,10 +6,16 @@ using UnityEngine.SceneManagement; //ESCENAS
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public string[] scenesInOrder;
+
+    private int stage; //en que nivel estamos?
 
     private int lives = 3;
-    private int score = 0;
+    private int levelScore = 0, sessionScore;
     private int enemiesInLevel = 0;
+    private UiManager uiManager;
+
+    
 
     void Awake()
     {
@@ -24,10 +30,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetUIManager (UiManager uim)
+    {
+        uiManager = uim;
+        uim.Init(lives, enemiesInLevel, 0);
+    }
+
     public bool PlayerDestroyed()
     {
         lives--;
         Debug.Log("VIDAS = " + lives);
+        if (uiManager != null) uiManager.UpdateLives(lives); //codigo defensivo
 
         if (lives <= 0) //no quedan vidas
         {
@@ -41,9 +54,10 @@ public class GameManager : MonoBehaviour
     {
         enemiesInLevel--;
         Debug.Log("Enemigos = " + enemiesInLevel);
+        if (uiManager != null) uiManager.RemoveEnemy(0);
 
-        score += destructionPoints;
-        Debug.Log("PUNTUACION = " + score);
+        levelScore += destructionPoints;
+        Debug.Log("PUNTUACION = " + levelScore);
     }
 
     public void FinishLevel(bool playerWon)
@@ -55,6 +69,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("PERDIO");
+          
         }
     }
 
