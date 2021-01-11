@@ -3,8 +3,6 @@
 public class Damageable : MonoBehaviour
 {
     public int maxDamage;
-   
-
     private int damage = 0;
     private Vector2 pos;
     private Quaternion rotation;
@@ -18,7 +16,7 @@ public class Damageable : MonoBehaviour
         player = GetComponent<PlayerController>();
     }
 
- 
+
 
     public void MakeDamage()
     {
@@ -27,9 +25,9 @@ public class Damageable : MonoBehaviour
         if (damage >= maxDamage)
         {
             // ES UN ENEMIGO
-            if (player == null) 
-            {               
-
+            if (player == null)
+            {
+                
                 Destroy(this.gameObject);
             }
 
@@ -40,7 +38,7 @@ public class Damageable : MonoBehaviour
                     //AUN LE QUEDAN VIDAS
                     if (!GameManager.instance.PlayerDestroyed())
                     {
-                        ReturnToOirigin();
+                        ReturnToOrigin();
                     }
                     else
                     {  // NO LE QUEDAN ==> SE DESTRUYE DEFINITIVAMENTE
@@ -50,20 +48,16 @@ public class Damageable : MonoBehaviour
 
                 else
                 {
-                    ReturnToOirigin();
+                    ReturnToOrigin();
                 }
-                 
-                
             }
-          
         }
     }
-
-    private void ReturnToOirigin() // METODO AUXILIAR
+    private void ReturnToOrigin() // METODO AUXILIAR
     {
         transform.position = pos;
         transform.rotation = rotation;
         damage = 0;
     }
-    
+
 }

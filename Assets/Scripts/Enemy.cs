@@ -2,8 +2,7 @@
 
 public class Enemy : MonoBehaviour
 {
-    public int points;
-
+    public int points = 100;
     void Start()
     {
         GameManager.instance.AddEnemy();
@@ -11,6 +10,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
+        //Cuando los enemigos se destruyen solos
         GameManager.instance.EnemyDestroyed(points);
     }
 }
