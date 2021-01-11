@@ -1,22 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement; //ESCENAS
+﻿using UnityEngine;
+using UnityEngine.SceneManagement; //Gestion de escenas
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public string[] scenesInOrder;
-
     private int stage; //Comprobar en que nivel estamos 
-
     private int lives = 3;
     private int levelScore = 0, sessionScore;
     private int enemiesInLevel = 0;
     private UiManager theUIManager;
-
-
-
     void Awake()
     {
         if (instance == null)
@@ -28,7 +21,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        stage = SceneManager.GetActiveScene().buildIndex; //Obtenemos el valor de stage antes de pasar al siguiente nivel 
+
     }
 
     public void SetUIManager(UiManager uim)
@@ -55,14 +48,15 @@ public class GameManager : MonoBehaviour
         enemiesInLevel--;
         if (theUIManager != null) theUIManager.RemoveEnemy(levelScore);
         levelScore += destructionPoints;
-        
+
     }
 
     public void FinishLevel(bool playerWon)
-    {       
+    {
         sessionScore += levelScore;
+        stage = SceneManager.GetActiveScene().buildIndex; //Obtenemos el valor de stage antes de pasar al siguiente nivel 
         theUIManager.Score(levelScore, sessionScore, stage, playerWon);
-
+        //Si ganas siguiente nivel , si pierdes vuelta al menu con el metodo game over 
         if (playerWon) Invoke("NextLevel", 3);
         else Invoke("GameOver", 3);
 
@@ -85,7 +79,7 @@ public class GameManager : MonoBehaviour
         lives = 3;
         stage = 0;
         //Como hemos perdido vamos al menu 
-        ChangeScene(scenesInOrder[0]);
+        ChangeScene(scenesInOrder[stage]);
     }
     void NextLevel()
     {
