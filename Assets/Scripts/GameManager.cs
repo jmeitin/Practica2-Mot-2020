@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public string[] scenesInOrder;
 
-    private int stage; //en que nivel estamos?
+    private int stage; //Comprobar en que nivel estamos 
 
     private int lives = 3;
     private int levelScore = 0, sessionScore;
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        stage = SceneManager.GetActiveScene().buildIndex; //Obtenemos el valor de stage antes de pasar al siguiente nivel 
     }
 
     public void SetUIManager(UiManager uim)
@@ -58,10 +59,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void FinishLevel(bool playerWon)
-    {
-
+    {       
         sessionScore += levelScore;
-        stage = SceneManager.GetActiveScene().buildIndex; //Obtenemos el valor de stage antes de pasar al siguiente nivel 
         theUIManager.Score(levelScore, sessionScore, stage, playerWon);
 
         if (playerWon) Invoke("NextLevel", 3);
