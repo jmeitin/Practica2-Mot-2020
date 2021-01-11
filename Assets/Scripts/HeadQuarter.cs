@@ -15,12 +15,12 @@ public class HeadQuarter : MonoBehaviour
         //ES EL PLAYER
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            GameManager.instance.FinishLevel(true); //GANO
+            GameManager.GetInstance().FinishLevel(true); //GANO
         }
         //ES UNA BALA
         else if (collision.gameObject.GetComponent<Bullet>() != null)
         {
-            GameManager.instance.FinishLevel(false); //PERDIO
+            GameManager.GetInstance().FinishLevel(false); //PERDIO
             srenderer.sprite = destroyedSprite;
         }
     }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI; //CANVAS
 
-public class UiManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     public Text livesText;
     public Image enemyIconPrefab;
@@ -17,7 +17,7 @@ public class UiManager : MonoBehaviour
 
     void Start()
     {
-        GameManager.instance.SetUIManager(this);
+        GameManager.GetInstance().SetUIManager(this);
         
     }
 

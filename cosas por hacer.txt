@@ -1,5 +1,0 @@
-free aspect camara
-
-proteger si no hay GameManager
-
-pag 25

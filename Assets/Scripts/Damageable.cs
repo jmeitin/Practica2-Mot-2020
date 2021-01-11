@@ -33,10 +33,10 @@ public class Damageable : MonoBehaviour
 
             else // ES EL PLAYER
             {
-                if (GameManager.instance != null) //PROTEGEMOS POR SI NO HAY GM
+                if (GameManager.GetInstance() != null) //PROTEGEMOS POR SI NO HAY GM
                 {
                     //AUN LE QUEDAN VIDAS
-                    if (!GameManager.instance.PlayerDestroyed())
+                    if (!GameManager.GetInstance().PlayerDestroyed())
                     {
                         ReturnToOrigin();
                     }

@@ -3,13 +3,13 @@ using UnityEngine.SceneManagement; //Gestion de escenas
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    private static GameManager instance;
     public string[] scenesInOrder;
     private int stage; //Comprobar en que nivel estamos 
     private int lives = 3;
     private int levelScore = 0, sessionScore;
     private int enemiesInLevel = 0;
-    private UiManager theUIManager;
+    private UIManager theUIManager;
     void Awake()
     {
         if (instance == null)
@@ -23,8 +23,11 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
-    public void SetUIManager(UiManager uim)
+    public static GameManager GetInstance()
+    {
+        return instance;
+    }
+    public void SetUIManager(UIManager uim)
     {
         theUIManager = uim;
         uim.Init(lives, enemiesInLevel, 0);

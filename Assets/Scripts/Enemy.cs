@@ -5,12 +5,12 @@ public class Enemy : MonoBehaviour
     public int points = 100;
     void Start()
     {
-        GameManager.instance.AddEnemy();
+        GameManager.GetInstance().AddEnemy();
     }
 
     private void OnDestroy()
     {
         //Cuando los enemigos se destruyen solos
-        GameManager.instance.EnemyDestroyed(points);
+        GameManager.GetInstance().EnemyDestroyed(points);
     }
 }
