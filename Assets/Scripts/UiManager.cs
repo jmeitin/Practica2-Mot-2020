@@ -12,27 +12,26 @@ public class UIManager : MonoBehaviour
     public GameObject infoPanel;
     public GameObject gameOverPanel;
 
-
     private int enemiesLeft;
 
     void Start()
     {
         GameManager.GetInstance().SetUIManager(this);
-        
     }
 
-    public void Init(int numLives, int numEnemies, int levelScore)
+    public void Init(int numLives, int numEnemies, int levelScore) //para que recibe levelScore?
     {
+        Debug.Log("NUMENEMIES = " + numEnemies);
         livesText.text = numLives.ToString();
         enemiesLeft = numEnemies;
         infoPanel.SetActive(false);
         gameOverPanel.SetActive(false);
+
         for (int i = 0; i < numEnemies; i++)
         {
             Image enemy = Instantiate(enemyIconPrefab);
             enemy.rectTransform.SetParent(enemiesPanel); //transform o rectTransform?
         }
-
     }
 
     public void UpdateLives(int numLives)
@@ -47,12 +46,10 @@ public class UIManager : MonoBehaviour
             if (enemiesPanel != null)
             {
                 enemiesPanel.GetChild(enemiesLeft - 1).gameObject.SetActive(false);
-               
             }
 
             enemiesLeft--;
         }
-      
     }
 
     public void Score(int levelScore, int sessionScore, int level, bool playing)

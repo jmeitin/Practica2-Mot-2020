@@ -2,11 +2,10 @@
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;   
     public float velocityScale = 5f;
 
+    private Rigidbody2D rb;
     private Vector2 valueUp;
-
     private Shooter shooter;
 
     void Awake()

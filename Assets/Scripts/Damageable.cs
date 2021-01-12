@@ -3,6 +3,7 @@
 public class Damageable : MonoBehaviour
 {
     public int maxDamage;
+
     private int damage = 0;
     private Vector2 pos;
     private Quaternion rotation;
@@ -16,8 +17,6 @@ public class Damageable : MonoBehaviour
         player = GetComponent<PlayerController>();
     }
 
-
-
     public void MakeDamage()
     {
         damage++;
@@ -26,8 +25,7 @@ public class Damageable : MonoBehaviour
         {
             // ES UN ENEMIGO
             if (player == null)
-            {
-                
+            {                
                 Destroy(this.gameObject);
             }
 

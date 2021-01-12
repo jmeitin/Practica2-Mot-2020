@@ -5,11 +5,13 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public string[] scenesInOrder;
+
     private int stage; //Comprobar en que nivel estamos 
     private int lives = 3;
     private int levelScore = 0, sessionScore;
     private int enemiesInLevel = 0;
     private UIManager theUIManager;
+
     void Awake()
     {
         if (instance == null)
@@ -21,12 +23,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
     }
+
     public static GameManager GetInstance()
     {
         return instance;
     }
+
     public void SetUIManager(UIManager uim)
     {
         theUIManager = uim;
@@ -49,6 +52,7 @@ public class GameManager : MonoBehaviour
     public void EnemyDestroyed(int destructionPoints)
     {
         enemiesInLevel--;
+        Debug.Log("Enemies = "+enemiesInLevel);
         if (theUIManager != null) theUIManager.RemoveEnemy(levelScore);
         levelScore += destructionPoints;
 
@@ -59,6 +63,7 @@ public class GameManager : MonoBehaviour
         sessionScore += levelScore;
         stage = SceneManager.GetActiveScene().buildIndex; //Obtenemos el valor de stage antes de pasar al siguiente nivel 
         theUIManager.Score(levelScore, sessionScore, stage, playerWon);
+
         //Si ganas siguiente nivel , si pierdes vuelta al menu con el metodo game over 
         if (playerWon) Invoke("NextLevel", 3);
         else Invoke("GameOver", 3);
@@ -73,7 +78,9 @@ public class GameManager : MonoBehaviour
     public void AddEnemy()
     {
         enemiesInLevel++;
+        Debug.Log("Nuevo Enemies = " + enemiesInLevel);
     }
+
     private void GameOver()
     {
         //Quitamos los puntos , ponemos 3 vidas al jugador y volvemos a la primera escena 
@@ -84,15 +91,18 @@ public class GameManager : MonoBehaviour
         //Como hemos perdido vamos al menu 
         ChangeScene(scenesInOrder[stage]);
     }
+
     void NextLevel()
     {
         stage++; //Avanzamos de Nivel 
+
         if (stage < scenesInOrder.Length) //Ver si es el ultimo nivel 
         {
             ChangeScene(scenesInOrder[stage]);
         }
         else GameOver();
     }
+
     void OnLevelWasLoaded(int level)
     {
         levelScore = 0;

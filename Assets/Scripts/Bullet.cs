@@ -3,6 +3,7 @@
 public class Bullet : MonoBehaviour
 {
     public float velocityScale = 8f;
+
     private Rigidbody2D rb;
 
     void Awake()

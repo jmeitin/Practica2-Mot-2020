@@ -582,8 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da8e99c5d70991418377f7912fbaafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyedSprite: {fileID: 2321076446191514138, guid: c39919cd98d232f478e693947939a1a0,
-    type: 3}
+  deadEagle: {fileID: 0}
 --- !u!212 &1053021060
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1057,13 +1056,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1321358775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2647f1c4143de9f46a6695f1c0d40e67, type: 3}
+  m_Script: {fileID: 11500000, guid: 8529992e24d2780459a96b07e3e3dd58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  livesText: {fileID: 152439883}
   enemyIconPrefab: {fileID: 3174091397190021947, guid: e2664414c49b7d84ea9c376425d4e807,
     type: 3}
   enemiesPanel: {fileID: 486171923}
-  livesText: {fileID: 152439883}
+  stageText: {fileID: 0}
+  levelScoreText: {fileID: 0}
+  sessionScoreText: {fileID: 0}
+  infoPanel: {fileID: 1283608608}
+  gameOverPanel: {fileID: 0}
 --- !u!1 &1543540451
 GameObject:
   m_ObjectHideFlags: 0

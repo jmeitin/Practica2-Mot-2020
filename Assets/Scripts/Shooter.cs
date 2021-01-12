@@ -5,8 +5,8 @@ public class Shooter : MonoBehaviour
     public GameObject bulletPrefab;
     public bool autoShoot;
     public float shootCadenceSecs = 1f;
-
     public float coolingDownSecs = 1f;
+
     private float auxSecs;
 
 

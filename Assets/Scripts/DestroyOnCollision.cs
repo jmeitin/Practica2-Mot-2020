@@ -7,7 +7,7 @@ public class DestroyOnCollision : MonoBehaviour
     {
         Damageable damageable = collision.gameObject.GetComponent<Damageable>();
         
-        if (damageable != null)
+        if (damageable != null) // si es un objeto que recibe danyo
         {
             damageable.MakeDamage();
         }
