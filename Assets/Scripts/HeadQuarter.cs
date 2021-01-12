@@ -2,26 +2,36 @@
 
 public class HeadQuarter : MonoBehaviour
 {
-    public Sprite destroyedSprite;
-    private SpriteRenderer srenderer;
-
-    void Awake()
+    public Sprite deadEagle;
+    SpriteRenderer spriteact;
+    bool active = false;
+    private void Awake()
     {
-        srenderer = GetComponent<SpriteRenderer>();
+        spriteact = GetComponent<SpriteRenderer>();
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        GameObject player = collision.gameObject;
+        if (player.GetComponent<PlayerController>() != null && spriteact != deadEagle)
+        {
+            if (!active)
+            {
+                GameManager.GetInstance().FinishLevel(true);
+                active = true;
+            }
 
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //ES EL PLAYER
-        if (collision.gameObject.GetComponent<PlayerController>() != null)
+        if (collision.gameObject.GetComponent<DestroyOnCollision>() != null)
         {
-            GameManager.GetInstance().FinishLevel(true); //GANO
+            if (spriteact.sprite != deadEagle)
+            {
+                spriteact.sprite = deadEagle;
+                GameManager.GetInstance().FinishLevel(false);
+            }
         }
-        //ES UNA BALA
-        else if (collision.gameObject.GetComponent<Bullet>() != null)
-        {
-            GameManager.GetInstance().FinishLevel(false); //PERDIO
-            srenderer.sprite = destroyedSprite;
-        }
+
     }
 }
