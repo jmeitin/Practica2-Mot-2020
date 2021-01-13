@@ -28,7 +28,6 @@ public class Damageable : MonoBehaviour
             {                
                 Destroy(this.gameObject);
             }
-
             else // ES EL PLAYER
             {
                 if (GameManager.GetInstance() != null) //PROTEGEMOS POR SI NO HAY GM

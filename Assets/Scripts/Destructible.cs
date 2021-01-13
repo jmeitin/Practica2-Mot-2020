@@ -10,7 +10,6 @@ public class Destructible : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
         else
         {
             Debug.Log("El muro choco con algo que no era una bala");
