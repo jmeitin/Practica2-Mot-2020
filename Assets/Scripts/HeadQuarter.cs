@@ -3,8 +3,8 @@
 public class HeadQuarter : MonoBehaviour
 {
     public Sprite deadEagle;
-
     private SpriteRenderer spriteact;
+    private PlayerController playercontrol;
     private bool active = false; 
 
     private void Awake()
@@ -18,10 +18,12 @@ public class HeadQuarter : MonoBehaviour
         //CHOCA CON PLAYER
         if (collision.gameObject.GetComponent<PlayerController>() != null && spriteact != deadEagle)
         {
+            playercontrol = collision.gameObject.GetComponent<PlayerController>();
             if (!active)
             {
-                GameManager.GetInstance().FinishLevel(true);
+                playercontrol.BlockControls();
                 active = true;
+                GameManager.GetInstance().FinishLevel(true);
             }
             
         }
@@ -32,10 +34,12 @@ public class HeadQuarter : MonoBehaviour
         //CHOCA CON UNA BALA
         if (collision.gameObject.GetComponent<Bullet>() != null)
         {
+            playercontrol = collision.gameObject.GetComponent<PlayerController>();
             if (spriteact.sprite != deadEagle)
             {
                 spriteact.sprite = deadEagle;
                 GameManager.GetInstance().FinishLevel(false);
+                playercontrol.BlockControls();
             }
         }
     }

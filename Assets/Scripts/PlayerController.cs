@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 valueUp;
     private Shooter shooter;
+    bool block= false;
 
     void Awake()
     {
@@ -22,40 +23,44 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Vertical") > 0)
+        if (!block)
         {
-            valueUp = new Vector2(0, 1);
-            transform.up = Vector2.up;
-        }
-        else if (Input.GetAxis("Vertical") < 0)
-        {
-            valueUp = new Vector2(0, -1);
-            transform.up = Vector2.down;
-        }
-        else if (Input.GetAxis("Horizontal") > 0)
-        {
-            valueUp = new Vector2(1, 0);
-            transform.up = Vector2.right; //transform.up?
-        }
-        else if (Input.GetAxis("Horizontal") < 0)
-        {
-            valueUp = new Vector2(-1, 0);
-            transform.up = Vector2.left;
-        }
-        else
-        {
-            valueUp = Vector2.zero;
+            if (Input.GetAxis("Vertical") > 0)
+            {
+                valueUp = new Vector2(0, 1);
+                transform.up = Vector2.up;
+            }
+            else if (Input.GetAxis("Vertical") < 0)
+            {
+                valueUp = new Vector2(0, -1);
+                transform.up = Vector2.down;
+            }
+            else if (Input.GetAxis("Horizontal") > 0)
+            {
+                valueUp = new Vector2(1, 0);
+                transform.up = Vector2.right; //transform.up?
+            }
+            else if (Input.GetAxis("Horizontal") < 0)
+            {
+                valueUp = new Vector2(-1, 0);
+                transform.up = Vector2.left;
+            }
+            else
+            {
+                valueUp = Vector2.zero;
+            }
+            if (Input.GetButton("Jump"))
+            {
+                shooter.Shoot();
+            }
         }
 
-        if (Input.GetButton("Jump"))
-        {
-            shooter.Shoot();
-        }
     }
 
     void FixedUpdate()
     {
         rb.velocity = velocityScale * valueUp;
     }
-
+    public void BlockControls() { block = true; }
+   
 }
