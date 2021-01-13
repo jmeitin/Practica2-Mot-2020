@@ -12,11 +12,14 @@ public class UIManager : MonoBehaviour
     public GameObject infoPanel;
     public GameObject gameOverPanel;
 
+    private GameManager gameManager;
+
     private int enemiesLeft;
 
     void Start()
     {
-        GameManager.GetInstance().SetUIManager(this);
+        gameManager = GameManager.GetInstance();
+        gameManager.SetUIManager(this);
     }
 
     public void Init(int numLives, int numEnemies, int levelScore) //para que recibe levelScore?

@@ -5,12 +5,18 @@ public class HeadQuarter : MonoBehaviour
     public Sprite deadEagle;
     private SpriteRenderer spriteact;
     private PlayerController playercontrol;
-    private bool active = false; 
+    private bool active = false;
+    private GameManager gameManager;
 
     private void Awake()
     {
         spriteact = GetComponent<SpriteRenderer>();
         if (spriteact == null) Debug.Log("HeadQuarter no tiene spriterenderer");
+    }
+
+    private void Start()
+    {
+        gameManager = GameManager.GetInstance();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -23,7 +29,7 @@ public class HeadQuarter : MonoBehaviour
             {
                 playercontrol.BlockControls();
                 active = true;
-                GameManager.GetInstance().FinishLevel(true);
+                gameManager.FinishLevel(true);
             }
             
         }
@@ -38,7 +44,7 @@ public class HeadQuarter : MonoBehaviour
             if (spriteact.sprite != deadEagle)
             {
                 spriteact.sprite = deadEagle;
-                GameManager.GetInstance().FinishLevel(false);
+                gameManager.FinishLevel(false);
                 playercontrol.BlockControls();
             }
         }

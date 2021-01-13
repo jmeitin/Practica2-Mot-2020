@@ -3,11 +3,13 @@
 public class Damageable : MonoBehaviour
 {
     public int maxDamage;
+    public int points = 100;
 
     private int damage = 0;
     private Vector2 pos;
     private Quaternion rotation;
     private PlayerController player;
+    private GameManager gameManager;
 
     void Awake()
     {
@@ -15,6 +17,11 @@ public class Damageable : MonoBehaviour
         pos = transform.position;
         rotation = transform.rotation;
         player = GetComponent<PlayerController>();
+    }
+
+    void Start()
+    {
+        gameManager = GameManager.GetInstance();
     }
 
     public void MakeDamage()
@@ -27,13 +34,15 @@ public class Damageable : MonoBehaviour
             if (player == null)
             {                
                 Destroy(this.gameObject);
+                //Cuando los enemigos se destruyen solos
+                gameManager.EnemyDestroyed(points);
             }
             else // ES EL PLAYER
             {
-                if (GameManager.GetInstance() != null) //PROTEGEMOS POR SI NO HAY GM
+                if (gameManager != null) //PROTEGEMOS POR SI NO HAY GM
                 {
                     //AUN LE QUEDAN VIDAS
-                    if (!GameManager.GetInstance().PlayerDestroyed())
+                    if (!gameManager.PlayerDestroyed())
                     {
                         ReturnToOrigin();
                     }

@@ -63,13 +63,13 @@ public class GameManager : MonoBehaviour
         sessionScore += levelScore;
         stage = SceneManager.GetActiveScene().buildIndex; //Obtenemos el valor de stage antes de pasar al siguiente nivel 
         theUIManager.Score(levelScore, sessionScore, stage, playerWon);
+        levelScore = 0;
 
         //Si ganas siguiente nivel , si pierdes vuelta al menu con el metodo game over 
-        if (playerWon) Invoke("NextLevel", 3);
-        else Invoke("GameOver", 3);
-
-
+        if (playerWon) Invoke("NextLevel", 3); //sig nivel si quedan, menu si no
+        else Invoke("GameOver", 3); //menu
     }
+
     public void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Nuevo Enemies = " + enemiesInLevel);
     }
 
-    private void GameOver()
+    private void GameOver() //menu
     {
         //Quitamos los puntos , ponemos 3 vidas al jugador y volvemos a la primera escena 
         levelScore = 0;
@@ -100,11 +100,8 @@ public class GameManager : MonoBehaviour
         {
             ChangeScene(scenesInOrder[stage]);
         }
-        else GameOver();
+        else GameOver(); //menu
     }
 
-    void OnLevelWasLoaded(int level)
-    {
-        levelScore = 0;
-    }
+   
 }
