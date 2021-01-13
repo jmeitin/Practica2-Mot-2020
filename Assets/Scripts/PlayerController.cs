@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
                 shooter.Shoot();
             }
         }
+        else valueUp = Vector2.zero;
 
     }
 
