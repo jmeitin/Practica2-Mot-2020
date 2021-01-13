@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         stage = SceneManager.GetActiveScene().buildIndex; //Obtenemos el valor de stage antes de pasar al siguiente nivel 
         theUIManager.Score(levelScore, sessionScore, stage, playerWon);
         levelScore = 0;
+        enemiesInLevel = 0;
 
         //Si ganas siguiente nivel , si pierdes vuelta al menu con el metodo game over 
         if (playerWon) Invoke("NextLevel", 3); //sig nivel si quedan, menu si no
