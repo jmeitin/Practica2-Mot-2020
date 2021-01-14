@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
         velocityScale = Mathf.Abs(velocityScale);
     }
 
-    void FixedUpdate()
+    void Start()
     {
         rb.velocity = transform.up * velocityScale;
     }

@@ -46,8 +46,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8175023785280941452, guid: 20338421b4d63a54fa8ea22120c0cb66,
     type: 3}
   autoShoot: 1
-  shootCadenceSecs: 1
-  coolingDownSecs: 1
+  shootCadenceSecs: 3
+  coolingDownSecs: 3
 --- !u!1 &5113038941696181458
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDamage: 1
+  points: 100
 --- !u!114 &5113038941696181452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,4 +206,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 483987d35451e3248867ce1c0eabf2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 100
